@@ -15,7 +15,7 @@ form.addEventListener("submit", (e) => {
 let formValidation = () => {
     if (textInput.value === "") {
         console.log("Failure. Blank input");
-        msg.innerHTML = "Tasks cannot be blank";
+        msg.innerHTML = "Título da atividade não pode ser nulo";
     } else {
         console.log("success");
         msg.innerHTML = "";
@@ -27,6 +27,7 @@ let formValidation = () => {
         (() => {
             add.setAttribute("data-bs-dismiss", "");
         })();
+        
     }
 };
 

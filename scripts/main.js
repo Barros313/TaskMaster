@@ -53,14 +53,18 @@ let createTasks = () => {
     data.map((x, y) => {
         return (tasks.innerHTML += `
             <div id=${y}>
-                <span class="fw-bold">${x.text}</span>
-                <span class="small text-secondary">${x.date}</span>
-                <p>${x.description}</p>
-            
-                <span class="options">
-                    <i onClick="editTask(this)" data-bs-toggle="modal" data-bs-target="#form" class="fas fa-edit"></i>
-                    <i onClick="deleteTask(this);createTasks()" class="fas fa-trash-alt"></i>
-                </span>
+                <span class="fw-bold" id="task-title${y}">${x.text}</span>
+                <span class="small text-secondary" id="task-date${y}">${x.date}</span>
+                <i onClick="expandTask(${y})" class="expand-button"> [Dropdown Icon] </i>
+                <div class="more-task" id="more${y}">
+                    <p id="task-description${y}" >${x.description}</p>
+                    <p> <i> [Location icon] ${x.address} </i>
+
+                    <span class="options">
+                        <i onClick="editTask(${y})" data-bs-toggle="modal" data-bs-target="#form" class="fas fa-edit"></i>
+                        <i onClick="deleteTask(this);createTasks()" class="fas fa-trash-alt"></i>
+                    </span>
+                </div>
             </div>
         `);
     });
@@ -84,12 +88,17 @@ let deleteTask = (e) => {
     console.log(data);
 };
 
-let editTask = (e) => {
-    let selectedTask = e.parentElement.parentElement;
+let expandTask = (index) => {
+    let currentTask = document.getElementById("more" + index);
+    currentTask.style.display = "block";
+};
 
-    textInput.value = selectedTask.children[0].innerHTML;
-    dateInput.value = selectedTask.children[1].innerHTML;
-    textarea = selectedTask.children[2].innerHTML;
+let editTask = (e) => {
+    // let selectedTask = e.parentElement.parentElement.parentElement;
+
+    textInput.value = document.getElementById("task-title" + e).innerHTML;
+    dateInput.value = document.getElementById("task-date" + e).innerHTML;
+    textarea.value = document.getElementById("task-description" + e).innerHTML;
 
     deleteTask(e);
 };

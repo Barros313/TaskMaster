@@ -1,10 +1,10 @@
 const addLocationIcon = document.getElementById("add-location");
 const mapsContainer = document.getElementById("maps-container");
 const closeMapsIcon = document.getElementById("close-maps-container");
-const insertAddressButton = mapsContainer.querySelector('button');
-let apiScript = projectScripts[projectScripts.length];
-let scriptURL = apiScript.src;
-console.log(apiScript);
+// const insertAddressButton = mapsContainer.querySelector('button');
+// let apiScript = projectScripts[projectScripts.length];
+// let scriptURL = apiScript.src;
+// console.log(apiScript);
 
 addLocationIcon.addEventListener("click", () => {
     mapsContainer.style.display = "block";

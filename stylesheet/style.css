@@ -64,3 +64,12 @@ body {
 #tasks div .options {
     cursor: pointer;
 }
+
+.more-task {
+    display: none;
+}
+
+.expand-button {
+    display: inline;
+    cursor: pointer;
+}

@@ -62,7 +62,7 @@ let createTasks = () => {
 
                     <span class="options">
                         <i onClick="editTask(${y})" data-bs-toggle="modal" data-bs-target="#form" class="fas fa-edit"></i>
-                        <i onClick="deleteTask(this);createTasks()" class="fas fa-trash-alt"></i>
+                        <i onClick="deleteTask(${y});createTasks()" class="fas fa-trash-alt"></i>
                     </span>
                 </div>
             </div>
@@ -78,10 +78,11 @@ let resetForm = () => {
     textarea.value = "";
 };
 
-let deleteTask = (e) => {
-    e.parentElement.parentElement.remove();
+let deleteTask = (index) => {
+    let currentTask = document.getElementById(index);
+    currentTask.remove();
 
-    data.splice(e.parentElement.parentElement.id, 1);
+    data.splice(currentTask.id, 1);
 
     localStorage.setItem("data", JSON.stringify(data));
 
@@ -93,14 +94,14 @@ let expandTask = (index) => {
     currentTask.style.display = "block";
 };
 
-let editTask = (e) => {
+let editTask = (index) => {
     // let selectedTask = e.parentElement.parentElement.parentElement;
 
-    textInput.value = document.getElementById("task-title" + e).innerHTML;
-    dateInput.value = document.getElementById("task-date" + e).innerHTML;
-    textarea.value = document.getElementById("task-description" + e).innerHTML;
+    textInput.value = document.getElementById("task-title" + index).innerHTML;
+    dateInput.value = document.getElementById("task-date" + index).innerHTML;
+    textarea.value = document.getElementById("task-description" + index).innerHTML;
 
-    deleteTask(e);
+    deleteTask(index);
 };
 
 (() => {

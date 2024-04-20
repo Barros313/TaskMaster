@@ -69,13 +69,19 @@ body {
     display: none;
 }
 
-.expand-button {
+#expand-button {
     justify-content: start;
     display: flex;
     cursor: pointer;
 }
 
-.hide-button {
+#hide-button {
     display: none;
     cursor: pointer;
+}
+
+@media (width <= 325px) {
+    .app {
+        display: none;
+    }
 }

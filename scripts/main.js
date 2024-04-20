@@ -61,11 +61,10 @@ let createTasks = () => {
                 <span class="fw-bold" id="task-title${y}">${x.text}</span>
                 <span class="small text-secondary" id="task-date${y}">${x.date}</span>
                 <i onClick="expandTask(${y})" class="fa-solid fa-circle-chevron-down expand-button" id="expand-button${y}"></i>
-                <i onClick="hideTask(${y})" class="fa-solid fa-circle-chevron-down hide-button" id="hide-button${y}"style="transform: rotate(180deg);"
-                ></i>
+                <i onClick="hideTask(${y})" class="fa-solid fa-circle-chevron-down hide-button" id="hide-button${y}" style="transform: rotate(180deg);display: none;"></i>
                 <div class="more-task" style="display: none;" id="more${y}">
                     <p id="task-description${y}" >${x.description}</p>
-                    <i class="fa-solid fa-location-dot"></i> <p> ${x.address} </p>
+                    <i class="fa-solid fa-location-dot"></i> <p>${x.address}</p>
 
                     <span class="options">
                         <i onClick="editTask(${y})" data-bs-toggle="modal" data-bs-target="#form" class="fas fa-edit"></i>

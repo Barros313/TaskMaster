@@ -1,5 +1,6 @@
 #add-location {
-    display: block;
+    display: flex;
+    justify-content: flex-start;
     cursor: pointer;
 }
 

@@ -16,18 +16,18 @@ closeMapsIcon.addEventListener("click", () => {
     addLocationIcon.style.display = "block";
 });
 
-insertAddressButton.addEventListener("click", () => {
-    const address = document.getElementById('location-input').value;
-    const aptSuite = document.getElementById('apt-suite-input').value;
-    const city = document.getElementById('locality-input').value;
-    const stateProvince = document.getElementById('administrative_area_level_1-input').value;
-    const zipPostalCode = document.getElementById('postal_code-input').value;
-    const country = document.getElementById('country-input').value;
+// insertAddressButton.addEventListener("click", () => {
+//     const address = document.getElementById('location-input').value;
+//     const aptSuite = document.getElementById('apt-suite-input').value;
+//     const city = document.getElementById('locality-input').value;
+//     const stateProvince = document.getElementById('administrative_area_level_1-input').value;
+//     const zipPostalCode = document.getElementById('postal_code-input').value;
+//     const country = document.getElementById('country-input').value;
   
-    console.log('Address:', address);
-    console.log('Apt/Suite:', aptSuite);
-    console.log('City:', city);
-    console.log('State/Province:', stateProvince);
-    console.log('Zip/Postal Code:', zipPostalCode);
-    console.log('Country:', country);
-});
+//     console.log('Address:', address);
+//     console.log('Apt/Suite:', aptSuite);
+//     console.log('City:', city);
+//     console.log('State/Province:', stateProvince);
+//     console.log('Zip/Postal Code:', zipPostalCode);
+//     console.log('Country:', country);
+// });

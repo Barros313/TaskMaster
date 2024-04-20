@@ -5,6 +5,7 @@ let textarea = document.getElementById("textarea");
 let msg = document.getElementById("msg");
 let tasks = document.getElementById("tasks");
 let add = document.getElementById("add");
+let cancel = document.getElementById("cancel-button");
 
 form.addEventListener("submit", (e) => {
     console.log("'Add' button pressed.");
@@ -51,15 +52,20 @@ let createTasks = () => {
     tasks.innerHTML = "";
 
     data.map((x, y) => {
+        if (x.address == null) {
+            x.address = "Sem endereço";
+        }
+
         return (tasks.innerHTML += `
             <div id=${y}>
                 <span class="fw-bold" id="task-title${y}">${x.text}</span>
                 <span class="small text-secondary" id="task-date${y}">${x.date}</span>
-                <i onClick="expandTask(${y})" class="expand-button" id="expand-button${y}"> [Dropdown Icon] </i>
-                <i onClick="hideTask(${y})" class="hide-button" id="hide-button${y}"> [Hide Icon] </i>
+                <i onClick="expandTask(${y})" class="fa-solid fa-circle-chevron-down expand-button" id="expand-button${y}"></i>
+                <i onClick="hideTask(${y})" class="fa-solid fa-circle-chevron-down hide-button" id="hide-button${y}"style="transform: rotate(180deg);"
+                ></i>
                 <div class="more-task" style="display: none;" id="more${y}">
                     <p id="task-description${y}" >${x.description}</p>
-                    <p> <i> [Location icon] ${x.address} </i>
+                    <i class="fa-solid fa-location-dot"></i> <p> ${x.address} </p>
 
                     <span class="options">
                         <i onClick="editTask(${y})" data-bs-toggle="modal" data-bs-target="#form" class="fas fa-edit"></i>
@@ -82,9 +88,9 @@ let resetForm = () => {
 let deleteTask = (index) => {
     let currentTask = document.getElementById(index);
     currentTask.remove();
-
+    
     data.splice(currentTask.id, 1);
-
+    
     localStorage.setItem("data", JSON.stringify(data));
 
     console.log(data);
@@ -117,9 +123,7 @@ let editTask = (index) => {
     dateInput.value = document.getElementById("task-date" + index).innerHTML;
     textarea.value = document.getElementById("task-description" + index).innerHTML;
 
-    add.addEventListener("click", () => {
-        deleteTask(index);
-    });
+    deleteTask(index);
 };
 
 (() => {

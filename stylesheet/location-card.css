@@ -1,0 +1,12 @@
+#add-location {
+    display: block;
+    cursor: pointer;
+}
+
+#maps-container {
+    display: none;
+}
+
+#close-maps-container {
+    cursor: pointer;
+}

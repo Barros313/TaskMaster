@@ -55,8 +55,9 @@ let createTasks = () => {
             <div id=${y}>
                 <span class="fw-bold" id="task-title${y}">${x.text}</span>
                 <span class="small text-secondary" id="task-date${y}">${x.date}</span>
-                <i onClick="expandTask(${y})" class="expand-button"> [Dropdown Icon] </i>
-                <div class="more-task" id="more${y}">
+                <i onClick="expandTask(${y})" class="expand-button" id="expand-button${y}"> [Dropdown Icon] </i>
+                <i onClick="hideTask(${y})" class="hide-button" id="hide-button${y}"> [Hide Icon] </i>
+                <div class="more-task" style="display: none;" id="more${y}">
                     <p id="task-description${y}" >${x.description}</p>
                     <p> <i> [Location icon] ${x.address} </i>
 
@@ -91,7 +92,22 @@ let deleteTask = (index) => {
 
 let expandTask = (index) => {
     let currentTask = document.getElementById("more" + index);
+    let expandButton = document.getElementById("expand-button" + index);
+    let hideButton = document.getElementById("hide-button" + index);
+
     currentTask.style.display = "block";
+    expandButton.style.display = "none";
+    hideButton.style.display = "inline";
+};
+
+let hideTask = (index) => {
+    let currentTask = document.getElementById("more" + index);
+    let expandButton = document.getElementById("expand-button" + index);
+    let hideButton = document.getElementById("hide-button" + index);
+
+    currentTask.style.display = "none";
+    expandButton.style.display = "inline";
+    hideButton.style.display = "none";
 };
 
 let editTask = (index) => {
@@ -101,7 +117,9 @@ let editTask = (index) => {
     dateInput.value = document.getElementById("task-date" + index).innerHTML;
     textarea.value = document.getElementById("task-description" + index).innerHTML;
 
-    deleteTask(index);
+    add.addEventListener("click", () => {
+        deleteTask(index);
+    });
 };
 
 (() => {

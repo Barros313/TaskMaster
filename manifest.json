@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "scope": "/",
     "short_name": "Task Master",
-    "start_url": "/index.html",
+    "start_url": "index.html",
     "theme_color": "#adcea1",
     "lang": "pt",
     "icons": [

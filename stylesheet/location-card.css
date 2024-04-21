@@ -2,6 +2,9 @@
     display: flex;
     justify-content: flex-start;
     cursor: pointer;
+    background-color: aqua;
+    width: fit-content;
+    height: fit-content;
 }
 
 #maps-container {

@@ -15,3 +15,7 @@
     float: right;
     cursor: pointer;
 }
+
+.location-content {
+    height: 200px;
+}

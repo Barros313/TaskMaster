@@ -17,7 +17,7 @@ body {
     border-radius: 8px;
     padding: 15px;
     /* Corrigir overflow */
-    overflow: scroll;
+    overflow: auto;
 }
 
 #addNew {
@@ -76,6 +76,11 @@ body {
 #hide-button {
     display: none;
     cursor: pointer;
+}
+
+#modal-body {
+    overflow: auto; 
+    height: fit-content;
 }
 
 @media (width <= 325px) {

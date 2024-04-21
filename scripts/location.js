@@ -1,10 +1,9 @@
 const addLocationIcon = document.getElementById("add-location");
 const mapsContainer = document.getElementById("maps-container");
 const closeMapsIcon = document.getElementById("close-maps-container");
-// const insertAddressButton = mapsContainer.querySelector('button');
-// let apiScript = projectScripts[projectScripts.length];
-// let scriptURL = apiScript.src;
-// console.log(apiScript);
+
+const mapsFrame = document.getElementById("maps-iframe");
+// const insertAddressButton =
 
 addLocationIcon.addEventListener("click", () => {
     mapsContainer.style.display = "block";
@@ -13,7 +12,7 @@ addLocationIcon.addEventListener("click", () => {
 
 closeMapsIcon.addEventListener("click", () => {
     mapsContainer.style.display = "none";
-    addLocationIcon.style.display = "block";
+    addLocationIcon.style.display = "inline-flex";
 });
 
 // insertAddressButton.addEventListener("click", () => {

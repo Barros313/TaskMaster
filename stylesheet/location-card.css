@@ -1,5 +1,5 @@
 #add-location {
-    display: flex;
+    display: inline-flex;
     justify-content: flex-start;
     cursor: pointer;
     /* background-color: aqua; (Testing)*/

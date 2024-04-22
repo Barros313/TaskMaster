@@ -1,43 +1,88 @@
-let chunks = [];
-let mediaRecorder;
+const audioContainer = document.getElementById('audio-container');
 
-const audioContainer = document.getElementById("audio-container");
-const startButton = document.getElementById("record-button");
-const stopButton = document.getElementById("stop-button");
-const audioElement = document.getElementById("audio-control");
-const recordingMessage = document.getElementById('recording-message');
+let streamer;
+let recorder;
+let recordedChunks = [];
 
-startButton.addEventListener("click", () => {
-    startButton.disabled = true;
-    startButton.style.display = 'none';
-    stopButton.disabled = false;
-    stopButton.style.display = 'inline-flex';
+let stopAudio = () => {
+    if (recorder && streamer) {
+        recorder.stop();
+        streamer.getTracks().forEach(track => track.stop());
 
-    recordingMessage.style.display = "inline-flex";
+        document.getElementById('recording-message')
+            .style.display = 'none';
+    }
+};
 
-    chunks = [];
+let playAudio = () => {
+    if (recordedChunks.length === 0) {
+        alert('Nenhum áudio gravado.');
+        return;
+    }
 
-    navigator.mediaDevices.getUserMedia({audio: true})
-        .then(stream => {
-            mediaRecorder = new MediaRecorder(stream);
-            mediaRecorder.ondataavailable = (event) => {
-                if (event.data.size > 0) {
-                    chunks.push(event.data);
-                }
+    let blob = new Blob(recordedChunks, { type: 'audio/webm' });
+    let audioURL = URL.createObjectURL(blob);
+    let audio = new Audio(audioURL);
+    
+    audio.controls = true;
+    audioContainer.appendChild(audio);
+    audio.play();
+};
+
+let removeAudio = () => {
+    if (recordedChunks.length === 0) {
+        alert('Nenhum áudio para excluir');
+        return;
+    }
+
+    recordedChunks = [];
+
+    let audioElement = document.querySelector('audio');
+    if (audioElement) {
+        audioElement.parentNode.removeChild(audioElement);
+    }
+};
+
+let recordAudio = () => {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        alert('API não suportada nesse navegador.');
+        return;
+    }
+
+    let constraints = { audio: true };
+
+    navigator.mediaDevices.getUserMedia(constraints)
+        .then((stream) => {
+            streamer = stream;
+
+            try {
+                recorder = new MediaRecorder(stream, { mimetype: "audio/webm" });
+            } catch (exc) {
+                console.error("Exception while creating MediaRecorder: " + exc);
+                return;
+            }
+
+            console.log("MediaRecorder created successfully");
+            recorder.ondataavailable = recorderOnDataAvailable;
+            recorder.start(100);
+
+            let recordingMessage = document.getElementById('recording-message');
+            recordingMessage.style.display = "inline";
+
+            recorder.onstop = () => {
+                playAudio();
+                recordingMessage.style.display = 'none';
             };
         })
         .catch((error) => {
-            console.error('Error acessing microphone: ')
-        }); 
-});
+           console.error('Error accessing the microphone: ' + error); 
+        });
+}
 
-stopButton.addEventListener("click", () => {
-    startButton.disabled = false;
-    startButton.style.display = 'inline-flex';
-    stopButton.disabled = true;
-    stopButton.style.display = 'none';
+let recorderOnDataAvailable = (event) => {
+    if(event.data.size == 0) {
+        return
+    };
 
-    recordingMessage.style.display = 'none';
-
-    mediaRecorder.stop();
-});
+    recordedChunks.push(event.data);
+};

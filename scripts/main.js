@@ -43,7 +43,7 @@ let acceptData = () => {
         text: textInput.value,
         date: dateInput.value,
         description: textarea.value,
-        audio: audioLink.value
+        // audio: audioLink.value
     });
 
     localStorage.setItem("data", JSON.stringify(data));

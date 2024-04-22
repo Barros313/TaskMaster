@@ -6,7 +6,10 @@ let msg = document.getElementById("msg");
 let tasks = document.getElementById("tasks");
 let add = document.getElementById("add");
 let cancel = document.getElementById("cancel-button");
-let audio = document.querySelector("audio");
+// let audioDiv = document.getElementById("audio-container");
+// var audioElem = audioDiv.getElementsByTagName("audio");
+// console.log(audioElem);
+// var audioLink = audioElem.getAttribute("src");
 
 form.addEventListener("submit", (e) => {
     console.log("'Add' button pressed.");
@@ -40,6 +43,7 @@ let acceptData = () => {
         text: textInput.value,
         date: dateInput.value,
         description: textarea.value,
+        audio: audioLink.value
     });
 
     localStorage.setItem("data", JSON.stringify(data));
@@ -67,7 +71,7 @@ let createTasks = () => {
                 id="hide-button${y}" style="transform: rotate(180deg);display: none;"></i>
                 <div class="more-task" style="display: none;" id="more${y}">
                     <p id="task-description${y}" >${x.description}</p>
-                    <i class="fa-solid fa-file-audio"></i> <p style="display: inline;">${x.audio}</p>
+                    <i class="fa-solid fa-file-audio"></i> <audio controls style="display: inline;"> <source src="${x.audio}" type="audio/webm"> </audio>
                     <br>
 
                     <span class="options">

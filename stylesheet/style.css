@@ -74,6 +74,7 @@ body {
 }
 
 #hide-button {
+    float: left;
     display: none;
     cursor: pointer;
 }

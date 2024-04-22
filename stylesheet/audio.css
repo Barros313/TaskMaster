@@ -2,6 +2,10 @@
     cursor: pointer;
 }
 
+audio {
+    width: 75%;
+}
+
 /* .recording.message {
     display: none;
 }

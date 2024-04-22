@@ -1,15 +1,19 @@
 let chunks = [];
 let mediaRecorder;
 
+const audioContainer = document.getElementById("audio-container");
 const startButton = document.getElementById("record-button");
 const stopButton = document.getElementById("stop-button");
 const audioElement = document.getElementById("audio-control");
+const recordingMessage = document.getElementById('recording-message');
 
 startButton.addEventListener("click", () => {
     startButton.disabled = true;
     startButton.style.display = 'none';
     stopButton.disabled = false;
     stopButton.style.display = 'inline-flex';
+
+    recordingMessage.style.display = "inline-flex";
 
     chunks = [];
 
@@ -31,5 +35,9 @@ stopButton.addEventListener("click", () => {
     startButton.disabled = false;
     startButton.style.display = 'inline-flex';
     stopButton.disabled = true;
-    stopButton.style.display = 'none';  
+    stopButton.style.display = 'none';
+
+    recordingMessage.style.display = 'none';
+
+    mediaRecorder.stop();
 });

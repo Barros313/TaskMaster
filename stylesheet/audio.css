@@ -1,0 +1,11 @@
+.audio-config {
+    cursor: pointer;
+}
+
+#record-button {
+    display: inline-flex;
+}
+
+#stop-button {
+    display: none;
+}

@@ -21,7 +21,7 @@
     />
     
     <link rel="stylesheet" href="stylesheet/style.css">
-    <link rel="stylesheet" href="stylesheet/location-card.css">
+    <link rel="stylesheet" href="stylesheet/audio.css">
 
     <link rel="manifest" href="manifest.json">
 
@@ -76,10 +76,9 @@
                 <br>
                 <p>Audio</p>
                 <div id="audio-container">
-                    <div class="audio-column">
-                        <p><button type="button" onClick="getStream('audio');">Grab audio</button></p>
-                        <audio controls></audio>
-                    </div>
+                    <i class="fa-solid fa-microphone audio-config" id="record-button"></i>
+                    <i class="fa-solid fa-stop audio-config" id="stop-button"></i>
+                    <audio class="audio-element" id="audio-control" controls></audio>
                 </div>
             </div>
             <div class="modal-footer">

@@ -1,46 +1,35 @@
-function getUserMedia(constraints) {
-    // if Promise-based API is available, use it
-    if (navigator.mediaDevices) {
-      return navigator.mediaDevices.getUserMedia(constraints);
-    }
-      
-    // otherwise try falling back to old, possibly prefixed API...
-    var legacyApi = navigator.getUserMedia || navigator.webkitGetUserMedia ||
-      navigator.mozGetUserMedia || navigator.msGetUserMedia;
-      
-    if (legacyApi) {
-      // ...and promisify it
-      return new Promise(function (resolve, reject) {
-        legacyApi.bind(navigator)(constraints, resolve, reject);
-      });
-    }
-  }
-  
-  function getStream (type) {
-    if (!navigator.mediaDevices && !navigator.getUserMedia && !navigator.webkitGetUserMedia &&
-      !navigator.mozGetUserMedia && !navigator.msGetUserMedia) {
-      alert('User Media API not supported.');
-      return;
-    }
-  
-    var constraints = {};
-    constraints[type] = true;
-    
-    getUserMedia(constraints)
-      .then(function (stream) {
-        var mediaControl = document.querySelector(type);
-        
-        if ('srcObject' in mediaControl) {
-          mediaControl.srcObject = stream;
-        } else if (navigator.mozGetUserMedia) {
-          mediaControl.mozSrcObject = stream;
-        } else {
-          mediaControl.src = (window.URL || window.webkitURL).createObjectURL(stream);
-        }
-        
-        mediaControl.play();
-      })
-      .catch(function (err) {
-        alert('Error: ' + err);
-      });
-  }
+let chunks = [];
+let mediaRecorder;
+
+const startButton = document.getElementById("record-button");
+const stopButton = document.getElementById("stop-button");
+const audioElement = document.getElementById("audio-control");
+
+startButton.addEventListener("click", () => {
+    startButton.disabled = true;
+    startButton.style.display = 'none';
+    stopButton.disabled = false;
+    stopButton.style.display = 'inline-flex';
+
+    chunks = [];
+
+    navigator.mediaDevices.getUserMedia({audio: true})
+        .then(stream => {
+            mediaRecorder = new MediaRecorder(stream);
+            mediaRecorder.ondataavailable = (event) => {
+                if (event.data.size > 0) {
+                    chunks.push(event.data);
+                }
+            };
+        })
+        .catch((error) => {
+            console.error('Error acessing microphone: ')
+        }); 
+});
+
+stopButton.addEventListener("click", () => {
+    startButton.disabled = false;
+    startButton.style.display = 'inline-flex';
+    stopButton.disabled = true;
+    stopButton.style.display = 'none';  
+});

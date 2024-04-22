@@ -1,4 +1,7 @@
 const audioContainer = document.getElementById('audio-container');
+const recordButton = document.getElementById('record-button');
+const stopButton = document.getElementById('stop-button');
+const removeButton = document.getElementById('remove-button');
 
 let streamer;
 let recorder;

@@ -60,8 +60,10 @@ let createTasks = () => {
             <div id=${y}>
                 <span class="fw-bold" id="task-title${y}">${x.text}</span>
                 <span class="small text-secondary" id="task-date${y}">${x.date}</span>
-                <i onClick="expandTask(${y})" class="fa-solid fa-circle-chevron-down expand-button" id="expand-button${y}"></i>
-                <i onClick="hideTask(${y})" class="fa-solid fa-circle-chevron-down hide-button" id="hide-button${y}" style="transform: rotate(180deg);display: none;"></i>
+                <i onClick="expandTask(${y})" class="fa-solid fa-circle-chevron-down expand-button" 
+                id="expand-button${y}"></i>
+                <i onClick="hideTask(${y})" class="fa-solid fa-circle-chevron-down hide-button" 
+                id="hide-button${y}" style="transform: rotate(180deg);display: none;"></i>
                 <div class="more-task" style="display: none;" id="more${y}">
                     <p id="task-description${y}" >${x.description}</p>
                     <i class="fa-solid fa-location-dot"></i> <p>${x.address}</p>
@@ -129,21 +131,4 @@ let editTask = (index) => {
     data = JSON.parse(localStorage.getItem("data")) || [];
     console.log(data);
     createTasks();
-})();   
-
-const addLocationIcon = document.getElementById("add-location");
-const mapsContainer = document.getElementById("maps-container");
-const closeMapsIcon = document.getElementById("close-maps-container");
-
-
-addLocationIcon.addEventListener("click", () => {
-    mapsContainer.style.display = "block";
-    addLocationIcon.style.display = "none";
-});
-
-closeMapsIcon.addEventListener("click", () => {
-    mapsContainer.style.display = "none";
-    addLocationIcon.style.display = "inline-flex";
-});
-
-console.log(scopeTest);
+})();
